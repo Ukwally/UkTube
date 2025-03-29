@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baixador de Vídeos do YouTube</title>
+    <link rel="stylesheet" href="../public/assets/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Baixador de Vídeos do YouTube</h1>
+        <form id="form-baixar">
+            <label for="url">URL do Vídeo:</label>
+            <input type="text" id="url" name="url" placeholder="Insira a URL do vídeo" required>
+            
+            <label for="diretorio">Diretório de Destino:</label>
+            <input type="text" id="diretorio" name="diretorio" placeholder="Caminho para salvar o vídeo" required>
+            
+            <button type="submit">Baixar</button>
+        </form>
+        <div id="mensagem"></div>
+    </div>
+
+    <script>
+        document.getElementById('form-baixar').addEventListener('submit', function (e) {
+            e.preventDefault(); // Evita o recarregamento da página
+
+            const url = document.getElementById('url').value;
+            const diretorio = document.getElementById('diretorio').value;
+
+            fetch('/baixar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url, diretorio_destino: diretorio }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const mensagemDiv = document.getElementById('mensagem');
+                if (data.status === 'sucesso') {
+                    mensagemDiv.innerHTML = `<p class="sucesso">${data.mensagem}</p>`;
+                } else {
+                    mensagemDiv.innerHTML = `<p class="erro">${data.mensagem}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+    </script>
+</body>
+</html>

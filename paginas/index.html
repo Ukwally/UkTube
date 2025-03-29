@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar-usuário</title>
+    <link rel="stylesheet" href="../public/assets/css/index.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="header-left">
+                <h1>UkTube</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-right-txt">
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="sub-header">
+        <small>Baixar áudios e vídeos do youtube</small>
+        <div>
+        <a class="btn" href="index.php">&#10094 voltar</a>
+        </div>
+    </div>
+    <div class="targuet-list">
+        <a href="#" target="_self" rel="noopener noreferrer"> Inicio &#10095</a>
+        <a href="#" target="_self" rel="noopener noreferrer"> Baixar </a>
+    </div>
+    <div class="content">
+        <div class="content-left">
+            <img src="../assets/dist/img/usingPhone.png" alt="">
+        </div>
+        <div class="content-right">
+            <h1>Download</h1>
+            <p>Copie o link do vídeo e cole aqui:</p>
+            <input class="input" type="search" name="Link" id="Link" >
+            <button class="btn" onclick="baixar()">Baixar</button>
+            <table  id="tabelaUsuarios">
+                <thead>
+                   <tr>
+                        <th>Ficheiro</th>
+                        <th>Titulo</th>
+                        <th>Configuração</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <!--tr>
+                        <td>
+                            <iframe style="width: 200px; height: 100px;" src="../public/src/Manipulando a camera - React Native + Expo pt 01.mp4" frameborder="0"></iframe>
+                        </td>
+                        <td>Manipulando a camera</td>
+                        <td>
+                            <input type="range" name="" id="">
+                            <input type="radio" name="resolucao" id="">
+                            <input type="radio" name="resolucao" id="">
+                            <input type="radio" name="resolucao" id="">
+                        </td>
+                    </tr-->
+                    <tr>
+                        <td>
+                            <video controls style="width: 200px; height: 100px;">
+                                <source src="../public/src/nome_do_video.mp4" type="video/mp4">
+                                Seu navegador não suporta o elemento de vídeo.
+                            </video>
+                        </td>
+                        <td>Título do Vídeo</td>
+                        <td>
+                            <input type="radio" name="resolucao_video" id="">
+                            <input type="radio" name="resolucao_video" id="">
+                            <input type="radio" name="resolucao_video" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <audio controls style="width: 200px;">
+                                <source src="../public/src/nome_do_arquivo.mp3" type="audio/mpeg">
+                                Seu navegador não suporta o elemento de áudio.
+                            </audio>
+                        </td>
+                        <td>Título do Áudio</td>
+                        <td>
+                            <input type="radio" name="qualidade_audio" id="">
+                            <input type="radio" name="qualidade_audio" id="">
+                            <input type="radio" name="qualidade_audio" id="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal" id="modal" style="display:none">
+        <div class="modal-card" id="modal-card">
+            <h2 id="modal-tittle"><img id="modalicon" src="./assets/dist/img/info.png" alt=""><span>FINALIZADO</span></h2>
+            <h4 id="modal-subtittle"></h4>
+            <button class="modal-btn modal-btn-confirmar" id="btnConfirmar">Confirmar!</button>
+            <button class="modal-btn modal-btn-cancelar" id="btnCancelar">Cancelar!</button>
+        </div>
+    </div>
+    <div class="div-footer">
+        <p>Lucar 2024 - Direitos reservados</p>
+        <form action="../scripts/logout.php" method="post">
+            <button type="submit"> </button>
+        </form>
+    </div>
+</body>
+</html>

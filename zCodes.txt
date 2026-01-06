@@ -1,0 +1,18 @@
+pip list » listar todas as dependencias python
+
+python -m venv uktube_Venv » criar o ambiente virtual
+
+.\venv\Scripts\activate
+
+Esse erro ocorre porque o PowerShell do Windows tem uma política de segurança que impede a execução de scripts por padrão, incluindo o script de ativação do ambiente virtual.
+Para resolver isso, você pode modificar a política de execução do PowerShell para permitir scripts. Aqui está como fazer isso:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Tentar nova mente:
+.\venv\Scripts\activate
+
+Se quiser reverter a política para a configuração anterior após ter ativado o ambiente, você pode rodar o seguinte comando:
+Set-ExecutionPolicy Restricted -Scope CurrentUser
+
+Com o ambiente virtual ativado, execute o seguinte comando para instalar as dependências do seu projeto:
+pip install flask yt-dlp flask-socketio

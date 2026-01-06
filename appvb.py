@@ -1,12 +1,8 @@
-#Erro:tentar baixar por pôr a palavra elizeth  no input diretório destino
-#Erro:tentar baixar por pôr um diretório youtube errado
 from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import os
-from flask_socketio import SocketIO, emit
 
 app = Flask(__name__, template_folder='paginas', static_folder='public')
-socketio = SocketIO(app)
 
 @app.route('/')
 def index():
@@ -24,12 +20,17 @@ def baixar():
     if not os.path.exists(diretorio_destino):
         os.makedirs(diretorio_destino)
 
-    # Função de progresso para enviar atualizações ao cliente via WebSocket
+    # Função de progresso
     def progresso_hook(d):
         if d['status'] == 'downloading':
             percent = d['downloaded_bytes'] / d['total_bytes'] * 100
-            # Envia a porcentagem para o cliente via SocketIO
-            socketio.emit('progresso', {'percent': percent})
+            print(f'Progresso: {percent:.2f}%')
+
+            # Envia a porcentagem de progresso ao cliente
+            # Aqui, você pode usar WebSocket ou outras formas de comunicação assíncrona para enviar ao cliente.
+            # Para simplificação, enviaremos um JSON apenas ao final (não ideal para progressão em tempo real).
+            if d.get('filename'):
+                print(f"Baixando: {d['filename']} - {percent:.2f}% concluído")
 
     ydl_opts = {
         'outtmpl': f'{diretorio_destino}/%(title)s.%(ext)s',
@@ -54,4 +55,4 @@ def baixar():
         return jsonify({"status": "erro", "mensagem": f"Erro: {str(e)}"}), 500
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    app.run(debug=True)
